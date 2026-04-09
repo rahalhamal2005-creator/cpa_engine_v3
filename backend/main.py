@@ -29,9 +29,9 @@ app.add_middleware(
 scheduler = BackgroundScheduler()
 
 def autonomous_execution_loop():
-    \"\"\"
+    """
     Main loop that runs daily to execute the 32 modules.
-    \"\"\"
+    """
     print("Executing Autonomous Cycle...")
     # Initialize engines with mock clients for now
     niche_engine = NicheEngine(youtube_client=None, openai_client=None)
