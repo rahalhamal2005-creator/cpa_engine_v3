@@ -64,6 +64,10 @@ def autonomous_execution_loop():
 scheduler.add_job(autonomous_execution_loop, "interval", hours=24)
 scheduler.start()
 
+@app.get("/")
+def health_check():
+    return {"status": "ok", "message": "Engine is running successfully"}
+
 @app.get("/api/dashboard")
 def get_dashboard_metrics(db: Session = Depends(get_db)):
     analytics = AnalyticsEngine(db)
