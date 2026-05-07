@@ -80,32 +80,6 @@ def force_run_cycle(background_tasks: BackgroundTasks):
 
 @app.get("/api/niche/search")
 def search_niches_manual(query: str, country: str = "US"):
-    # For now, return mock dynamic data based on the keyword & country
-    # In next iteration, this will connect to google trends & youtube API
-    
-    return {
-        "niches": [
-            {
-                "name": f"{query} Free Currency Hack ({country})",
-                "audience": "Free-to-play teenagers",
-                "pain_points": "Cannot afford shop items",
-                "recommended_funnel": "Direct offer wall -> CPA",
-                "trend_status": "🔥 Viral Breakout",
-                "search_volume": "14,500/mo",
-                "competition": "Low",
-                "avg_views": "2.4M",
-                "traffic_sources": "TikTok & Shorts"
-            },
-            {
-                "name": f"Private Modded Server for {query}",
-                "audience": "Banned/Bored players",
-                "pain_points": "Want all items unlocked instantly",
-                "recommended_funnel": "Content locker -> APK download",
-                "trend_status": "📈 Steady Growth",
-                "search_volume": "8,200/mo",
-                "competition": "Medium",
-                "avg_views": "850K",
-                "traffic_sources": "YouTube Search"
-            }
-        ]
-    }
+    niche_engine = NicheEngine()
+    result = niche_engine.search_niches(query, country)
+    return result

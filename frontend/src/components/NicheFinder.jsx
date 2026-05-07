@@ -64,35 +64,79 @@ export default function NicheFinder({ apiUrl }) {
 
       <div className="space-y-4">
         {results.map((niche, idx) => (
-          <div key={idx} className="bg-dark-900 p-5 rounded-lg border border-dark-600 hover:border-gray-500 transition-colors">
+          <div key={idx} className="bg-dark-900 p-5 rounded-lg border border-dark-600 hover:border-brand-500/50 transition-colors shadow-lg">
             <div className="flex justify-between items-start mb-4">
-              <h3 className="text-xl font-bold text-brand-300">{niche.name}</h3>
-              <span className="bg-red-900/40 text-red-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-red-800">Trend: {niche.trend_status}</span>
+              <div>
+                <h3 className="text-2xl font-bold text-brand-300">{niche.game}</h3>
+                <p className="text-red-400 font-semibold mt-1">🔥 Trending: {niche.trending_aspect}</p>
+              </div>
+              <span className="bg-dark-800 text-gray-300 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border border-dark-600">Target: {niche.audience}</span>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
-              <div className="bg-dark-800 p-3 rounded-md">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-6">
+              <div className="bg-dark-800 p-3 rounded-md border border-dark-700">
                 <span className="text-gray-500 block text-xs uppercase mb-1">Search Volume</span>
                 <span className="text-white font-bold text-lg">{niche.search_volume}</span>
               </div>
-              <div className="bg-dark-800 p-3 rounded-md">
+              <div className="bg-dark-800 p-3 rounded-md border border-dark-700">
                 <span className="text-gray-500 block text-xs uppercase mb-1">CPA Competition</span>
                 <span className={`font-bold text-lg ${niche.competition === 'Low' ? 'text-green-400' : niche.competition === 'Medium' ? 'text-yellow-400' : 'text-red-400'}`}>{niche.competition}</span>
               </div>
-              <div className="bg-dark-800 p-3 rounded-md">
-                <span className="text-gray-500 block text-xs uppercase mb-1">Avg Views/Video</span>
+              <div className="bg-dark-800 p-3 rounded-md border border-dark-700">
+                <span className="text-gray-500 block text-xs uppercase mb-1">Avg YT Views</span>
                 <span className="text-white font-bold text-lg">{niche.avg_views}</span>
               </div>
-              <div className="bg-dark-800 p-3 rounded-md">
+              <div className="bg-dark-800 p-3 rounded-md border border-dark-700">
                 <span className="text-gray-500 block text-xs uppercase mb-1">Top Sources</span>
                 <span className="text-brand-400 font-bold text-sm leading-tight">{niche.traffic_sources}</span>
               </div>
             </div>
 
-            <div className="bg-blue-900/20 border border-blue-900/50 p-4 rounded-md">
-                <h4 className="text-blue-300 text-sm font-bold mb-2">CPA Lead Strategy</h4>
-                <p className="text-gray-300 text-sm">Target <strong className="text-white">{niche.audience}</strong> looking for <strong className="text-red-300">"{niche.pain_points}"</strong>. 
-                Best working funnel right now: <strong className="text-green-400">{niche.recommended_funnel}</strong>.</p>
+            <div className="space-y-4 mt-2">
+              {niche.viral_title && (
+                <div className="bg-gradient-to-r from-yellow-900/20 to-orange-900/10 border border-yellow-700/50 p-4 rounded-lg shadow-inner">
+                    <h4 className="text-yellow-400 text-sm font-bold mb-2 uppercase tracking-wide flex items-center gap-2">🔥 Viral Title Idea</h4>
+                    <p className="text-white text-lg font-bold">"{niche.viral_title}"</p>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {niche.video_idea && (
+                  <div className="bg-indigo-900/10 border border-indigo-900/40 p-4 rounded-lg">
+                      <h4 className="text-indigo-400 text-sm font-bold mb-2 uppercase tracking-wide flex items-center gap-2">🎬 Video Idea</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed">{niche.video_idea}</p>
+                  </div>
+                )}
+                
+                {niche.cpa_integration && (
+                  <div className="bg-pink-900/10 border border-pink-900/40 p-4 rounded-lg">
+                      <h4 className="text-pink-400 text-sm font-bold mb-2 uppercase tracking-wide flex items-center gap-2">🔗 CPA Integration</h4>
+                      <p className="text-gray-300 text-sm leading-relaxed mb-2">
+                        <strong className="text-pink-300">Angle:</strong> {niche.offer_angle || 'Mod Menu / Free Skins'}
+                      </p>
+                      <p className="text-gray-300 text-sm leading-relaxed">
+                        <strong className="text-pink-300">Call to Action:</strong> {niche.cpa_integration}
+                      </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-blue-900/10 border border-blue-900/40 p-4 rounded-lg">
+                  <h4 className="text-blue-400 text-sm font-bold mb-2 uppercase tracking-wide">📹 Promotion Strategy</h4>
+                  <p className="text-gray-300 text-sm leading-relaxed">{niche.promotion_strategy}</p>
+              </div>
+
+              <div className="bg-green-900/10 border border-green-900/40 p-4 rounded-lg">
+                  <h4 className="text-green-400 text-sm font-bold mb-2 uppercase tracking-wide">🔒 Content Locker Strategy</h4>
+                  <p className="text-gray-300 text-sm leading-relaxed">{niche.locker_strategy}</p>
+              </div>
+
+              {niche.trend_prediction && (
+                <div className="bg-purple-900/10 border border-purple-900/40 p-4 rounded-lg">
+                    <h4 className="text-purple-400 text-sm font-bold mb-2 uppercase tracking-wide">📈 Trend Forecast</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">{niche.trend_prediction}</p>
+                </div>
+              )}
             </div>
           </div>
         ))}
